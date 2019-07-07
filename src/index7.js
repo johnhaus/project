@@ -19,17 +19,21 @@ const Book = ({title, author, pages}) => {
 
 //
 class Library extends React.Component {
-  // Allows removal of constructor
-  state = { open: false }
-
-  toggleOpenClosed = () => {
-    // Using a callback function here
-    this.setState(prevState => ({
-      // returns the opposite of whatever current state of 'open' is.
-      open: !prevState.open
-    }))
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: true
+    }
+    // When using constructor method, need to bind 'this'
+    // Allows for toggling to be triggered with a button
+    this.toggleOpenClosed = this.toggleOpenClosed.bind(this)
   }
-
+  toggleOpenClosed() {
+    this.setState({
+      // returns the opposite of whatever current state of 'open' is.
+      open: !this.state.open
+    })
+  }
   render() {
     console.log(this.state)
     // before destructuring
